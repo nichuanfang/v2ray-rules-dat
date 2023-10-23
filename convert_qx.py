@@ -32,8 +32,8 @@ for reject in reject_list:
         qx_reject_list.append(f'HOST-SUFFIX,{reject.strip()}, REJECT')
         
 # 保存文件
-with open("./publish/proxy-list.txt", 'w') as f:
+with open("./publish/qx-proxy-list.txt", 'w') as f:
     f.write('\n'.join(qx_proxy_list))
     
-with open("./publish/reject-list.txt", 'w') as f:
+with open("./publish/qx-reject-list.txt", 'w') as f:
     f.write('\n'.join(qx_reject_list))
