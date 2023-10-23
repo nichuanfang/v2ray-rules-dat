@@ -16,7 +16,7 @@ with open("./publish/reject-list.txt", 'r') as f:
 # 生成代理文件
 for proxy in proxy_list:
     if proxy.strip().startswith('full:'):
-        qx_proxy_list.append(f'HOST,{proxy.strip()}, PROXY')
+        qx_proxy_list.append(f'HOST,{proxy.strip()[5:]}, PROXY')
     elif proxy.strip().startswith('regexp:'):
         continue
     else:
@@ -25,7 +25,7 @@ for proxy in proxy_list:
 # 生成拒绝文件
 for reject in reject_list:
     if reject.strip().startswith('full:'):
-        qx_reject_list.append(f'HOST,{reject.strip()}, REJECT')
+        qx_reject_list.append(f'HOST,{reject.strip()[5:]}, REJECT')
     elif reject.strip().startswith('regexp:'):
         continue
     else:
