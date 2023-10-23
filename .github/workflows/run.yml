@@ -180,6 +180,11 @@ jobs:
           sha256sum geosite.dat > geosite.dat.sha256sum
           sha256sum rules.zip > rules.zip.sha256sum
 
+      - name: test
+        run: |
+          chmod +x convert_qx.py
+          ./convert_qx.py
+
       - name: Release and upload assets
         uses: svenstaro/upload-release-action@v2
         with:
