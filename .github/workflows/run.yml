@@ -180,7 +180,7 @@ jobs:
           sha256sum geosite.dat > geosite.dat.sha256sum
           sha256sum rules.zip > rules.zip.sha256sum
 
-      - name: test
+      - name: Generate qx files
         run: |
           chmod +x convert_qx.py
           ./convert_qx.py
