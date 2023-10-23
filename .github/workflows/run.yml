@@ -180,11 +180,6 @@ jobs:
           sha256sum geosite.dat > geosite.dat.sha256sum
           sha256sum rules.zip > rules.zip.sha256sum
 
-      - name: verify proxy-list location
-        run: |
-          cd publish
-          ls
-
       - name: Release and upload assets
         uses: svenstaro/upload-release-action@v2
         with:
