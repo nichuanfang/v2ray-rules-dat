@@ -1,13 +1,15 @@
-# 简介
+# 简介 ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/Loyalsoldier/v2ray-rules-dat/total?logo=github) ![GitHub Downloads (all assets, latest release)](https://img.shields.io/github/downloads/Loyalsoldier/v2ray-rules-dat/latest/total?logo=github) [![jsdelivr stats](https://data.jsdelivr.com/v1/package/gh/Loyalsoldier/v2ray-rules-dat/badge?style=rounded)](https://www.jsdelivr.com/package/gh/Loyalsoldier/v2ray-rules-dat)
 
-[**V2Ray**](https://github.com/v2fly/v2ray-core) 路由规则文件加强版，可代替 V2Ray 官方 `geoip.dat` 和 `geosite.dat`，兼容 [Shadowsocks-windows](https://github.com/shadowsocks/shadowsocks-windows)、[Xray-core](https://github.com/XTLS/Xray-core)、[Trojan-Go](https://github.com/p4gefau1t/trojan-go)、[leaf](https://github.com/eycorsican/leaf) 和 [hysteria](https://github.com/apernet/hysteria)。使用 GitHub Actions 北京时间每天早上 6 点自动构建，保证规则最新。
+[**V2Ray**](https://github.com/v2fly/v2ray-core) 路由规则文件加强版，可代替 V2Ray 官方 `geoip.dat` 和 `geosite.dat`，适用于 [V2Ray](https://github.com/v2fly/v2ray-core)、[Xray-core](https://github.com/XTLS/Xray-core)、[mihomo](https://github.com/MetaCubeX/mihomo/tree/Meta)、[hysteria](https://github.com/apernet/hysteria)、[Trojan-Go](https://github.com/p4gefau1t/trojan-go)、[leaf](https://github.com/eycorsican/leaf)。使用 GitHub Actions 北京时间每天早上 6 点自动构建，保证规则最新。
 
 ## 规则文件生成方式
 
 ### geoip.dat
 
 - 通过仓库 [@Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip) 生成
-- 其中全球 IP 地址（IPv4 和 IPv6）来源于 [MaxMind GeoLite2](https://dev.maxmind.com/geoip/geoip2/geolite2/)，`CN`（中国大陆）类别下的 IPv4 地址融合了 [ipip.net](https://github.com/17mon/china_ip_list) 和 [@gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip)，`CN`（中国大陆）类别下的 IPv6 地址融合了 [MaxMind GeoLite2](https://dev.maxmind.com/geoip/geoip2/geolite2/) 和 [@gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip)
+- 默认使用 [MaxMind GeoLite2 Country CSV 数据](https://github.com/Loyalsoldier/geoip/blob/release/GeoLite2-Country-CSV.zip)生成各个国家和地区的 GeoIP 文件。所有可供使用的国家和地区 geoip 类别（如 `geoip:cn`，两位英文字母表示国家或地区），请查看：[https://www.iban.com/country-codes](https://www.iban.com/country-codes)
+- 中国大陆 (`geoip:cn`) IPv4 地址数据融合了 [IPIP.net](https://github.com/17mon/china_ip_list/blob/master/china_ip_list.txt) 和 [@gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip/blob/ip-lists/china.txt)
+- 中国大陆 (`geoip:cn`) IPv6 地址数据融合了 MaxMind GeoLite2 和 [@gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip/blob/ip-lists/china6.txt)
 - 新增类别（方便有特殊需求的用户使用）：
   - `geoip:cloudflare`
   - `geoip:cloudfront`
@@ -18,7 +20,7 @@
   - `geoip:telegram`
   - `geoip:twitter`
 
-> 希望定制 `geoip.dat` 文件？查看仓库 [@Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip)。
+> 希望定制 `geoip.dat` 文件？需要适用于其他代理软件的 GeoIP 格式文件？查看项目 [@Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip)。
 
 ### geosite.dat
 
@@ -44,11 +46,12 @@
 - **可添加自定义直连、代理和广告域名**：由于上游域名列表更新缓慢或缺失某些域名，所以引入**需要添加的域名**列表。[`hidden 分支`](https://github.com/Loyalsoldier/v2ray-rules-dat/tree/hidden)里的三个文件 `direct.txt`、`proxy.txt` 和 `reject.txt`，分别存放自定义的需要添加的直连、代理、广告域名，最终分别加入到 `geosite:cn`、`geosite:geolocation-!cn` 和 `geosite:category-ads-all` 类别中
 - **可移除自定义直连、代理和广告域名**：由于上游域名列表存在需要被移除的域名，所以引入**需要移除的域名**列表。[`hidden 分支`](https://github.com/Loyalsoldier/v2ray-rules-dat/tree/hidden)里的三个文件 `direct-need-to-remove.txt`、`proxy-need-to-remove.txt` 和 `reject-need-to-remove.txt`，分别存放自定义的需要从 `direct-list`（直连域名列表）、`proxy-list`（代理域名列表）和 `reject-list`（广告域名列表） 移除的域名
 
-## 规则文件下载及使用方式
+## 规则文件下载地址
 
-**下载地址**：
-
-> 如果无法访问域名 `raw.githubusercontent.com`，可以使用第二个地址（`cdn.jsdelivr.net`），但是内容更新会有 12 小时的延迟。
+> 如果无法访问域名 `raw.githubusercontent.com`，可以使用第二个地址 `cdn.jsdelivr.net`。
+> 如果无法访问域名 `cdn.jsdelivr.net`，可以将其替换为 `fastly.jsdelivr.net`。
+>
+> *.sha256sum 为校验文件。
 
 - **geoip.dat**：
   - [https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat](https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat)
@@ -87,20 +90,14 @@
   - [https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/win-extra.txt](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/win-extra.txt)
   - [https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/win-extra.txt](https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/win-extra.txt)
 
-**使用方式**：
-
-1. 安装适用于自己操作系统的客户端
-2. 下载本项目的 `geoip.dat` 和 `geosite.dat`
-3. 把下载下来的 `geoip.dat` 和 `geosite.dat` 放入到客户端的规则文件目录，替换掉原来的 `geoip.dat` 和 `geosite.dat`
-4. 如果使用的是 V2Ray v4 版本客户端，配置可参考下面 👇👇👇
-
-## 参考配置(仅适用于 V2Ray v4 版本)
+## 规则文件使用方式
 
 ### geoip.dat
 
-跟 V2Ray 官方 `geoip.dat` 配置方式相同。
-
-**Routing 配置方式**：
+<details>
+  <summary>点击查看在 <b>V2Ray</b> 和 <b>Xray-core</b> 中的使用方法</summary>
+  <br/>
+  <p>需要先下载 <code>geoip.dat</code> 格式文件，并放置在程序目录内。</p>
 
 ```json
 "routing": {
@@ -109,30 +106,69 @@
       "type": "field",
       "outboundTag": "Direct",
       "ip": [
-        "223.5.5.5/32",
-        "119.29.29.29/32",
-        "180.76.76.76/32",
-        "114.114.114.114/32",
         "geoip:cn",
-        "geoip:private"
+        "geoip:private",
+        "ext:cn.dat:cn",
+        "ext:private.dat:private",
+        "ext:geoip-only-cn-private.dat:cn",
+        "ext:geoip-only-cn-private.dat:private"
       ]
     },
     {
       "type": "field",
       "outboundTag": "Proxy",
       "ip": [
-        "1.1.1.1/32",
-        "1.0.0.1/32",
-        "8.8.8.8/32",
-        "8.8.4.4/32",
         "geoip:us",
-        "geoip:ca",
-        "geoip:telegram"
+        "geoip:jp",
+        "geoip:facebook",
+        "geoip:telegram",
+        "ext:geoip-asn.dat:facebook",
+        "ext:geoip-asn.dat:telegram"
       ]
     }
   ]
 }
 ```
+</details>
+
+<details>
+  <summary>点击查看在 <b>mihomo</b> 中的使用方法</summary>
+
+```yaml
+geodata-mode: true
+geox-url:
+  geoip: "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat"
+```
+</details>
+
+<details>
+  <summary>点击查看在 <b>hysteria</b> 中的使用方法</summary>
+  <br/>
+  <p>需要先下载 <code>geoip.dat</code> 格式文件，并放置在 hysteria 程序目录内。</p>
+
+```
+direct(geoip:cn)
+proxy(geoip:telegram)
+proxy(geoip:us)
+```
+</details>
+
+<details>
+  <summary>点击查看在 <b>Trojan-Go</b> 中的使用方法</summary>
+  <br/>
+  <p>需要先下载 <code>geoip.dat</code> 格式文件，并放置在 Trojan-Go 程序目录内。</p>
+
+```json
+"router": {
+  "enabled": true,
+  "bypass": ["geoip:cn"],
+  "proxy": ["geoip:telegram", "geoip:us"],
+  "block": ["geoip:jp"],
+  "default_policy": "proxy",
+  "geoip": "./geoip.dat"
+}
+```
+</details>
 
 ### geosite.dat
 
@@ -432,11 +468,6 @@ steamstatic.com.8686c.com @cn
   }
 }
 ```
-
-## 使用本项目的项目
-
-- [@Loyalsoldier/clash-rules](https://github.com/Loyalsoldier/clash-rules)
-- [@Loyalsoldier/surge-rules](https://github.com/Loyalsoldier/surge-rules)
 
 ## 致谢
 
